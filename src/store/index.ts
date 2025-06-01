@@ -1,6 +1,16 @@
-export { charactersReducer } from "./reducers/characterReducer";
+export {
+	charactersFetching,
+	charactersFetchingSuccess,
+	charactersFetchingError,
+	setSearchInputValue,
+} from "./reducers/charactersSlice";
+
+export {
+	setPages,
+	setCurrentPage,
+	setPortionCount
+} from "./reducers/paginationSlice";
 export { locationsReducer } from "./reducers/locationsReducer";
-export { paginationReducer } from "./reducers/paginationReducer";
 export { episodesReducer } from "./reducers/episodesReducer";
 export { rootReducer } from "./reducers/rootReducer";
 
@@ -9,13 +19,11 @@ export {
 	type AppStore,
 	type RootState,
 	type AppDispatch,
-	type AppThunk
 } from "./store";
 
 export {
 	fetchCharacters,
 	fetchFiltredCharacters,
-	setSearchInputValue
 } from './actions/characters';
 
 export {
@@ -25,12 +33,6 @@ export {
 export {
 	fetchEpisodes
 } from './actions/episodes';
-
-export {
-	setPages,
-	setCurrentPage,
-	setPortionCount,
-} from './actions/pagination';
 
 export {
 	setIsLoading,

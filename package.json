@@ -1,6 +1,6 @@
 {
-  "name": "react_redux_homework",
-  "homepage": "https://nym-tmn.github.io/react_redux_homework",
+  "name": "react_rtk_homework",
+  "homepage": "https://nym-tmn.github.io/react_rtk_homework",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,20 +13,19 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@types/react-redux": "^7.1.34",
+    "@reduxjs/toolkit": "^2.8.2",
     "axios": "^1.9.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.6.0",
-    "redux": "^5.0.1",
-    "redux-thunk": "^3.1.0",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "@types/react-redux": "^7.1.34",
     "@types/styled-components": "^5.1.34",
     "@vitejs/plugin-react": "^4.4.1",
     "eslint": "^9.25.0",

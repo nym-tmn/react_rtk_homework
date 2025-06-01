@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
-import { charactersReducer, episodesReducer, locationsReducer, paginationReducer } from "@store";
+import charactersReducer from './charactersSlice';
+import paginationReducer from './paginationSlice';
 
 export const rootReducer = combineReducers({
-	characters: charactersReducer,
-	locations: locationsReducer,
-	pagination: paginationReducer,
-	episodes: episodesReducer,
+	charactersReducer,
+	paginationReducer,
 });

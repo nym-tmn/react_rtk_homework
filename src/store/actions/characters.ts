@@ -1,79 +1,51 @@
 import { getCharacters, getFiltredCharacters } from "@api";
-import { setError, setIsLoading, setPages, setResourse, type AppThunk } from "@store";
-import { CharactersActionTypes } from "@types";
+import {
+	charactersFetching,
+	charactersFetchingError,
+	charactersFetchingSuccess,
+	setPages,
+	type AppDispatch
+} from "@store";
 import axios from "axios";
 
-// Async
-
-export const fetchCharacters = (currentPage: number): AppThunk => async (dispatch) => {
+export const fetchCharacters = (currentPage: number) => async (dispatch: AppDispatch) => {
 	try {
-		dispatch(setIsLoading(CharactersActionTypes.FETCH_CHARACTERS))
+		dispatch(charactersFetching())
 		const response = await getCharacters(currentPage);
-		dispatch(setResourse(
-			CharactersActionTypes.FETCH_CHARACTERS_SUCCESS,
-			response.results
-		));
+		dispatch(charactersFetchingSuccess(response.results));
 		dispatch(setPages(response.info.pages))
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			if (error.response?.status === 404) {
-				dispatch(setError(
-					CharactersActionTypes.FETCH_CHARACTERS_ERROR,
-					"Failed to load characters."
-				));
+				dispatch(charactersFetchingError("Failed to load characters."));
 			}
 		} else if (error instanceof Error) {
 			console.error(error.message);
-			dispatch(setError(
-				CharactersActionTypes.FETCH_CHARACTERS_ERROR,
-				"An unexpected error occurred"
-			));
+			dispatch(charactersFetchingError("An unexpected error occurred"));
 		} else {
 			console.error('Unknown error:', error);
-			dispatch(setError(
-				CharactersActionTypes.FETCH_CHARACTERS_ERROR,
-				"Something went wrong"
-			));
+			dispatch(charactersFetchingError("Something went wrong"));
 		}
 	}
 }
 
-export const fetchFiltredCharacters = (currentPage: number, debouncedSearchValue: string): AppThunk => async (dispatch) => {
+export const fetchFiltredCharacters = (currentPage: number, debouncedSearchValue: string) => async (dispatch: AppDispatch) => {
 	try {
-		dispatch(setIsLoading(CharactersActionTypes.FETCH_CHARACTERS))
+		dispatch(charactersFetching())
 		const response = await getFiltredCharacters(currentPage, debouncedSearchValue);
-		dispatch(setResourse(
-			CharactersActionTypes.FETCH_CHARACTERS_SUCCESS,
-			response.results
-		))
+		dispatch(charactersFetchingSuccess(response.results))
 		dispatch(setPages(response.info.pages))
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			if (error.response?.status === 404) {
-				dispatch(setError(
-					CharactersActionTypes.FETCH_CHARACTERS_ERROR,
-					`No characters found for "${debouncedSearchValue}"`
-				));
+				dispatch(charactersFetchingError(`No characters found for "${debouncedSearchValue}"`));
 			}
 		} else if (error instanceof Error) {
 			console.error(error.message);
-			dispatch(setError(
-				CharactersActionTypes.FETCH_CHARACTERS_ERROR,
-				"An unexpected error occurred"
-			));
+			dispatch(charactersFetchingError("An unexpected error occurred"));
 		} else {
 			console.error('Unknown error:', error);
-			dispatch(setError(
-				CharactersActionTypes.FETCH_CHARACTERS_ERROR,
-				"Something went wrong"
-			));
+			dispatch(charactersFetchingError("Something went wrong"));
 		}
 	}
 }
-
-// Sync
-
-export const setSearchInputValue = (searchInputValue: string) => ({
-	type: CharactersActionTypes.CHARACTERS_SET_SEARCH_INPUT_VALUE,
-	payload: searchInputValue,
-})

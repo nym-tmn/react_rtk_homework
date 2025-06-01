@@ -1,19 +1,14 @@
-import { applyMiddleware, legacy_createStore as createStore, type AnyAction } from "redux";
-import type { ThunkAction } from "redux-thunk";
-import { thunk } from "redux-thunk";
-import { rootReducer } from "@store";
+import { configureStore } from "@reduxjs/toolkit"
+import { rootReducer } from '@store';
 
-export const store = createStore(rootReducer, undefined, applyMiddleware(thunk));
+const setupStore = () => {
+	return configureStore({
+		reducer: rootReducer,
+	})
+}
 
-export type AppStore = typeof store
-
-export type AppDispatch = AppStore['dispatch']
+export const store = setupStore();
 
 export type RootState = ReturnType<typeof rootReducer>
-
-export type AppThunk<ReturnType = void> = ThunkAction<
-	ReturnType,
-	RootState,
-	undefined,
-	AnyAction
->;
+export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch']

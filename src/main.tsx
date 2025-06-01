@@ -9,7 +9,7 @@ import { store } from '@store'
 createRoot(document.getElementById('root')!).render(
 	<>
 		<Provider store={store}>
-			<BrowserRouter basename="/react_redux_homework">
+			<BrowserRouter basename="/react_rtk_homework">
 				<GlobalStyles />
 				<ThemeProvider>
 					<App />

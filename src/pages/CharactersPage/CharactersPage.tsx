@@ -13,9 +13,18 @@ export const CharactersPage = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	const [selectedCharacter, setSelectedCharacter] = useState<CharacterType | null>(null);
 
-	const { pages, currentPage, portionCount } = useAppSelector(state => state.pagination);
+	const {
+		pages,
+		currentPage,
+		portionCount
+	} = useAppSelector(state => state.paginationReducer);
 
-	const {isLoading, results: characters, searchInputValue, error } = useAppSelector(state => state.characters);
+	const {
+		isLoading,
+		results: characters,
+		searchInputValue,
+		error
+	} = useAppSelector(state => state.charactersReducer)
 
 	const dispatch = useAppDispatch();
 
