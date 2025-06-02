@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { NavButton } from "@layouts";
 import { Flex } from "@components";
+import { NavButton } from "@layouts/Nav/NavButton";
 
 const StyledNavContainer = ({ className }: { className?: string }) => {
 	return (

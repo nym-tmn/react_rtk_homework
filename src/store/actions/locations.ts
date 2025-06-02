@@ -1,7 +1,7 @@
-import { getLocations } from "@api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { handleError } from "@utils";
-import type { LocationsType, ResponseType } from "@types";
+import { getLocations } from "@api/services";
+import type { LocationsType, ResponseType } from "@allTypes/api";
 
 export const fetchLocations = createAsyncThunk<
 	ResponseType<LocationsType>,

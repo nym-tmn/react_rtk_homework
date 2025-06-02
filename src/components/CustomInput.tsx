@@ -1,5 +1,5 @@
+import type { CustomnInputProps } from "@allTypes/components";
 import styled, { css } from "styled-components"
-import type { CustomnInputProps } from "@types"
 
 const StyledCustomnInput = styled.div<CustomnInputProps>`
 align-self: ${({ $alignSelf }) => $alignSelf || 'flex-start'};

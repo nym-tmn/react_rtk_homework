@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router";
-import classes from '@layouts/MainLayout/Header/Title/Title.module.css';
+import classes from '@layouts/Header/Title/Title.module.css';
 
 export const Title = React.memo(() => {
 

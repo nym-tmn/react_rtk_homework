@@ -1,5 +1,5 @@
+import type { ContentTitleProps } from "@allTypes/components";
 import styled from "styled-components";
-import type { ContentTitleProps } from "@types";
 
 const StyledContentTitle = styled.h2<ContentTitleProps>`
 overflow-wrap: break-word;

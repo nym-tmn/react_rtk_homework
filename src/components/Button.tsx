@@ -1,5 +1,5 @@
+import type { ButtonProps } from "@allTypes/components";
 import { css, styled } from "styled-components";
-import type { ButtonProps } from "@types";
 
 const reset = css`
   display: block;

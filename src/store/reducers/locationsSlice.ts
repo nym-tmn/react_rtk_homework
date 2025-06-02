@@ -1,6 +1,6 @@
+import type { LocationsState } from "@allTypes/store";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchLocations } from "@store/actions/locations";
-import { type LocationsState } from "@types";
+import { fetchLocations } from "@store/actions";
 
 const initialState: LocationsState = {
 	isLoading: false,

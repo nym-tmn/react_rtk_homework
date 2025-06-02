@@ -1,9 +1,14 @@
 import { Route, Routes } from "react-router"
 import styled from "styled-components"
-import { MainLayout } from "@layouts"
-import { CharactersPage, EmptyPage, EpisodesPage, ExtraPage, HomePage, LocationsPage } from "@pages"
 import { Flex } from "@components"
 import { useTheme } from "@hooks"
+import { MainLayout } from "@layouts"
+import { CharactersPage } from "@pages/CharactersPage"
+import { EmptyPage } from "@pages/EmptyPage"
+import { EpisodesPage } from "@pages/EpisodesPage"
+import { ExtraPage } from "@pages/ExtraPage"
+import { HomePage } from "@pages/HomePage"
+import { LocationsPage } from "@pages/LocationsPage"
 
 const StyledAppContainer = ({ className }: { className?: string }) => {
 

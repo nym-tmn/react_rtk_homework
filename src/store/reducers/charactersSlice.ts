@@ -1,6 +1,6 @@
+import type { CharactersState } from "@allTypes/store";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { fetchCharacters} from "@store/actions/characters";
-import { type CharactersState } from "@types";
+import { fetchCharacters } from "@store/actions";
 
 const initialState: CharactersState = {
 	isLoading: false,

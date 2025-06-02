@@ -1,5 +1,5 @@
-import type { AppDispatch } from "@store";
-import type { CharacterType } from "@types";
+import type { CharacterType } from "@allTypes/api";
+import type { AppDispatch } from "@store/store";
 
 export interface ButtonProps {
 	prefix?: string;

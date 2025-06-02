@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { CustomImage } from "@components"
-import type { CharacterProps } from "@types"
 import React from "react";
+import type { CharacterProps } from "@allTypes/components";
 
 const StyedCharacter = styled.article`
 max-width: 200px;

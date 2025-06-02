@@ -1,5 +1,6 @@
-import type { EpisodeType } from "@types"
-import { ContentTitle, InfoCardStyles, ParagraphsStyles } from "@components";
+import type { EpisodeType } from "@allTypes/api";
+import { ContentTitle } from "@components";
+import { InfoCardStyles, ParagraphsStyles } from "@components/styles";
 
 export const Episode: React.FC<Pick<EpisodeType, 'name' | 'episode' | 'air_date'>> = ({ name, episode, air_date }) => {
 	return (

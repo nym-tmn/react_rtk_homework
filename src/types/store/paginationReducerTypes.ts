@@ -1,5 +1,4 @@
 export interface PaginationState {
-	pages: number;
 	currentPage: number;
 	portionCount: number;
 }

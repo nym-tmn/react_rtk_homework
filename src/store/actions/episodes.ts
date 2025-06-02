@@ -1,6 +1,6 @@
-import { getEpisodes } from "@api";
+import { getEpisodes } from "@api/services";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import type { EpisodesType, ResponseType } from "@types";
+import type { EpisodesType, ResponseType } from "@allTypes/api";
 import { handleError } from "@utils";
 
 export const fetchEpisodes = createAsyncThunk<

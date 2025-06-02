@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import homePageImage from '@assets/images/home_page_image.webp'
 import { ContentTitle, CustomImage, Flex } from '@components'
+import { homePageImage } from '@assets/images';
 
 const StyledHomePageContainer = ({ className }: { className?: string }) => {
 	return (

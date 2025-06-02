@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useMemo, useState, type ChangeEvent } from "react"
-import { Button, ContentTitle, CustomImage, CustomnInput, Flex, Modal, Pagination, SectionStyles } from "@components"
+import { Button, ContentTitle, CustomImage, CustomnInput, Flex, Modal, Pagination } from "@components"
+import { SectionStyles } from "@components/styles";
 import { Character } from "./Character/Character";
-import { type CharacterType } from "@types";
-import failedImage from '@assets/images/failed_Image.webp';
-import loadingImage from '@assets/images/loading.webp';
 import { useDebounce } from "@hooks";
 import { useAppDispatch, useAppSelector } from "@hooks";
-import { setCurrentPage, setSearchInputValue } from "@store";
-import { fetchCharacters } from "@store/actions/characters";
+import { loadingImage, failedImage } from "@assets/images";
+import type { CharacterType } from "@allTypes/api";
+import { fetchCharacters } from "@store/actions";
+import { setSearchInputValue } from "@store/reducers/charactersSlice";
+import { setCurrentPage } from "@store/reducers/paginationSlice";
 
 export const CharactersPage = () => {
 
@@ -35,7 +36,7 @@ export const CharactersPage = () => {
 
 	const charactersList = useMemo(() => {
 		if (!characters) return null;
-		return characters.map(character =>
+		return characters.map((character: CharacterType) =>
 			<Button
 				key={character.id}
 				$isAnimate={true}

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router"
-import logo from "@assets/images/logo.webp"
 import { CustomImage } from "@components"
 import React from "react";
+import { logo } from "@assets/images";
 
 export const Logo = React.memo(() => {
 

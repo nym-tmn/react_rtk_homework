@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { LocationItem } from "./Location/LocationItem";
-import { ContentTitle, CustomImage, Flex, Pagination, SectionStyles } from "@components";
-import failedImage from '@assets/images/failed_Image.webp';
-import loadingImage from '@assets/images/loading.webp';
+import { ContentTitle, CustomImage, Flex, Pagination } from "@components";
+import { SectionStyles } from "@components/styles";
 import { useAppDispatch, useAppSelector } from "@hooks";
-import { fetchLocations } from "@store";
+import { loadingImage, failedImage } from "@assets/images";
+import type { LocationType } from "@allTypes/api";
+import { fetchLocations } from "@store/actions";
 
 export const LocationsPage = () => {
 
@@ -47,7 +48,7 @@ export const LocationsPage = () => {
 					<SectionStyles>
 						<Flex $justify="center" $wrap="wrap" $gap="20px" $margin="0 0 20px 0">
 							{locations && locations
-								.map(location =>
+								.map((location: LocationType) =>
 									<LocationItem
 										key={location.id}
 										name={location.name}

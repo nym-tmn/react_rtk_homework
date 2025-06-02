@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { Button, Flex } from "@components"
-import { type PaginationProps } from "@types";
 import React from "react";
-import { setCurrentPage, setPortionCount } from "@store";
+import { setCurrentPage, setPortionCount } from "@store/reducers/paginationSlice";
+import type { PaginationProps } from "@allTypes/components";
 
 export const Pagination: React.FC<PaginationProps> = React.memo(({
 	pages,

@@ -1,7 +1,9 @@
 import { Outlet } from "react-router";
 import styled from "styled-components";
-import { Footer, Header, Nav } from "@layouts";
 import { Flex } from "@components";
+import { Nav } from "@layouts/Nav";
+import { Footer } from "@layouts/Footer";
+import { Header } from "@layouts/Header";
 
 const StyledMainContentContainer = ({ className }: { className?: string }) => {
 	return (

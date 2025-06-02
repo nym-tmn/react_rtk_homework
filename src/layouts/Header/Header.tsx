@@ -1,7 +1,9 @@
 import { styled } from "styled-components"
 import { Flex, ThemeToggle } from "@components"
-import { Clock, Logo, Title } from "@layouts"
 import React from "react";
+import { Title } from "@layouts/Header/Title";
+import { Logo } from "@layouts/Header/Logo";
+import { Clock } from "@layouts/Header/Clock";
 
 const StyledHeader = styled.header`
 border-bottom: 1px solid #bdbfbb;

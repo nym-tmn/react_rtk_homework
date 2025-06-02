@@ -3,8 +3,8 @@ import { createPortal } from "react-dom"
 import { styled } from "styled-components";
 import { usePortal } from "@hooks";
 import { ParagraphsStyles } from "./styles/Paragraphs.styles";
-import type { ModalProps } from "@types";
 import { Button, CustomImage, Flex } from "@components";
+import type { ModalProps } from "@allTypes/components";
 
 const StyledDialog = styled.dialog`
 border: 2px solid #4fbaf0;

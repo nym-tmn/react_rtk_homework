@@ -1,6 +1,6 @@
-import { getCharacters, getFiltredCharacters } from "@api";
+import { getCharacters, getFiltredCharacters } from "@api/services";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import type { CharactersType, ResponseType } from "@types";
+import type { CharactersType, ResponseType } from "@allTypes/api";
 import { handleError } from "@utils";
 
 export const fetchCharacters = createAsyncThunk<

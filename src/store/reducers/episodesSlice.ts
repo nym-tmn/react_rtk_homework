@@ -1,6 +1,6 @@
+import type { EpisodesState } from "@allTypes/store";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchEpisodes } from "@store/actions/episodes";
-import { type EpisodesState } from "@types";
+import { fetchEpisodes } from "@store/actions";
 
 const initialState: EpisodesState = {
 	isLoading: false,

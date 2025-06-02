@@ -1,5 +1,6 @@
-import type { LocationType } from "@types"
-import { ContentTitle, InfoCardStyles, ParagraphsStyles } from "@components";
+import type { LocationType } from "@allTypes/api";
+import { ContentTitle } from "@components";
+import { InfoCardStyles, ParagraphsStyles } from "@components/styles";
 
 export const LocationItem: React.FC<Pick<LocationType, 'name' | 'dimension' | 'type'>> = ({ name, dimension, type }) => {
 	return (

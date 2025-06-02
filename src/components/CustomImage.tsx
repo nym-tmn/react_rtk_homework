@@ -1,5 +1,5 @@
+import type { CustomImageProps } from "@allTypes/components";
 import styled from "styled-components";
-import type { CustomImageProps } from "@types";
 
 const StyledCustomImage = styled.figure<CustomImageProps>`
 overflow: hidden;
