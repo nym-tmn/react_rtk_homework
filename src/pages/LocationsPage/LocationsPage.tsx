@@ -8,9 +8,9 @@ import { fetchLocations } from "@store";
 
 export const LocationsPage = () => {
 
-	const { pages, currentPage, portionCount } = useAppSelector(state => state.paginationReducer)
+	const { currentPage, portionCount } = useAppSelector(state => state.paginationReducer)
 
-	const { isLoading, results: locations, error } = useAppSelector(state => state.locationsReducer);
+	const { isLoading, results: locations, error, pages } = useAppSelector(state => state.locationsReducer);
 
 	const dispatch = useAppDispatch();
 

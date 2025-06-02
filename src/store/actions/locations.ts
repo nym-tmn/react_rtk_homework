@@ -1,30 +1,20 @@
-import axios from "axios";
 import { getLocations } from "@api";
-import {
-	locationsFetching,
-	locationsFetchingError,
-	locationsFetchingSuccess,
-	setPages,
-	type AppDispatch
-} from "@store";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { handleError } from "@utils";
+import type { LocationsType, ResponseType } from "@types";
 
-export const fetchLocations = (currentPage: number) => async (dispatch: AppDispatch) => {
-	try {
-		dispatch(locationsFetching());
-		const response = await getLocations(currentPage);
-		dispatch(locationsFetchingSuccess(response.results));
-		dispatch(setPages(response.info.pages));
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			if (error.response?.status === 404) {
-				dispatch(locationsFetchingError("Failed to load characters."));
-			}
-		} else if (error instanceof Error) {
-			console.error(error.message);
-			dispatch(locationsFetchingError("An unexpected error occurred"));
-		} else {
-			console.error('Unknown error:', error);
-			dispatch(locationsFetchingError("Something went wrong"));
+export const fetchLocations = createAsyncThunk<
+	ResponseType<LocationsType>,
+	number,
+	{ rejectValue: string }
+>(
+	'locations/fetchAll',
+	async (currentPage: number, thunkAPI) => {
+		try {
+			const response = await getLocations(currentPage);
+			return response;
+		} catch (error) {
+			return handleError(error, thunkAPI, "Failed to load locations.")
 		}
 	}
-}
+)

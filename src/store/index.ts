@@ -9,12 +9,6 @@ export {
 } from "./reducers/charactersSlice";
 
 export {
-	locationsFetching,
-	locationsFetchingSuccess,
-	locationsFetchingError,
-} from "./reducers/locationsSlice";
-
-export {
 	episodesFetching,
 	episodesFetchingSuccess,
 	episodesFetchingError,

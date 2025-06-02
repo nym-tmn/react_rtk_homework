@@ -3,7 +3,8 @@ import type { LocationsType } from "@types";
 export interface LocationsState {
 	isLoading: boolean;
 	results: LocationsType;
-	error: string;
+	error?: string;
+	pages: number;
 }
 
 export enum LocationsActionTypes {
