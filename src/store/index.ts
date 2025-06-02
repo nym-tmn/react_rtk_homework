@@ -1,4 +1,10 @@
 export {
+	setPages,
+	setCurrentPage,
+	setPortionCount
+} from "./reducers/paginationSlice";
+
+export {
 	charactersFetching,
 	charactersFetchingSuccess,
 	charactersFetchingError,
@@ -6,12 +12,17 @@ export {
 } from "./reducers/charactersSlice";
 
 export {
-	setPages,
-	setCurrentPage,
-	setPortionCount
-} from "./reducers/paginationSlice";
-export { locationsReducer } from "./reducers/locationsReducer";
-export { episodesReducer } from "./reducers/episodesReducer";
+	locationsFetching,
+	locationsFetchingSuccess,
+	locationsFetchingError,
+} from "./reducers/locationsSlice";
+
+export {
+	episodesFetching,
+	episodesFetchingSuccess,
+	episodesFetchingError,
+} from "./reducers/episodesSlice";
+
 export { rootReducer } from "./reducers/rootReducer";
 
 export {
@@ -27,15 +38,9 @@ export {
 } from './actions/characters';
 
 export {
-	fetchLocatoins
+	fetchLocations
 } from './actions/locations';
 
 export {
 	fetchEpisodes
 } from './actions/episodes';
-
-export {
-	setIsLoading,
-	setResourse,
-	setError,
-} from './actions/common';

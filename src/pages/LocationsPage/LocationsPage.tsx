@@ -4,18 +4,18 @@ import { ContentTitle, CustomImage, Flex, Pagination, SectionStyles } from "@com
 import failedImage from '@assets/images/failed_Image.webp';
 import loadingImage from '@assets/images/loading.webp';
 import { useAppDispatch, useAppSelector } from "@hooks";
-import { fetchLocatoins } from "@store";
+import { fetchLocations } from "@store";
 
 export const LocationsPage = () => {
 
-	const { pages, currentPage, portionCount } = useAppSelector(state => state.pagination)
+	const { pages, currentPage, portionCount } = useAppSelector(state => state.paginationReducer)
 
-	const { isLoading, results: locations, error } = useAppSelector(state => state.locations);
+	const { isLoading, results: locations, error } = useAppSelector(state => state.locationsReducer);
 
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		dispatch(fetchLocatoins(currentPage));
+		dispatch(fetchLocations(currentPage));
 	}, [dispatch, currentPage])
 
 	return (

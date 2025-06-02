@@ -1,39 +1,30 @@
 import axios from "axios";
 import { getEpisodes } from "@api";
-import { setError, setIsLoading, setPages, setResourse, type AppThunk } from "@store";
-import { EpisodesActionTypes } from "@types";
+import type { AppDispatch } from "@store/store";
+import {
+	episodesFetching,
+	episodesFetchingError,
+	episodesFetchingSuccess,
+	setPages
+} from "@store";
 
-// Async
-
-export const fetchEpisodes = (currentPage: number): AppThunk => async (dispatch) => {
+export const fetchEpisodes = (currentPage: number) => async (dispatch: AppDispatch) => {
 	try {
-		dispatch(setIsLoading(EpisodesActionTypes.FETCH_EPISODES));
+		dispatch(episodesFetching());
 		const response = await getEpisodes(currentPage);
-		dispatch(setResourse(
-			EpisodesActionTypes.FETCH_EPISODES_SUCCESS,
-			response.results
-		));
+		dispatch(episodesFetchingSuccess(response.results));
 		dispatch(setPages(response.info.pages));
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			if (error.response?.status === 404) {
-				dispatch(setError(
-					EpisodesActionTypes.FETCH_EPISODES_ERROR,
-					"Failed to load characters."
-				));
+				dispatch(episodesFetchingError("Failed to load characters."));
 			}
 		} else if (error instanceof Error) {
 			console.error(error.message);
-			dispatch(setError(
-				EpisodesActionTypes.FETCH_EPISODES_ERROR,
-				"An unexpected error occurred"
-			));
+			dispatch(episodesFetchingError("An unexpected error occurred"));
 		} else {
 			console.error('Unknown error:', error);
-			dispatch(setError(
-				EpisodesActionTypes.FETCH_EPISODES_ERROR,
-				"Something went wrong"
-			));
+			dispatch(episodesFetchingError("Something went wrong"));
 		}
 	}
 }
