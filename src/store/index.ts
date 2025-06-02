@@ -8,12 +8,6 @@ export {
 	setSearchInputValue,
 } from "./reducers/charactersSlice";
 
-export {
-	episodesFetching,
-	episodesFetchingSuccess,
-	episodesFetchingError,
-} from "./reducers/episodesSlice";
-
 export { rootReducer } from "./reducers/rootReducer";
 
 export {

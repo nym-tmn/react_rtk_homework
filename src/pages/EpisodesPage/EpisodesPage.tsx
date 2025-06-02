@@ -8,9 +8,9 @@ import { fetchEpisodes } from "@store";
 
 export const EpisodesPage = () => {
 
-	const { pages, currentPage, portionCount } = useAppSelector(state => state.paginationReducer);
+	const { /* pages, */ currentPage, portionCount } = useAppSelector(state => state.paginationReducer);
 
-	const { isLoading, results: episodes, error } = useAppSelector(state => state.episodesReducer);
+	const { isLoading, results: episodes, error, pages } = useAppSelector(state => state.episodesReducer);
 
 	const dispatch = useAppDispatch();
 

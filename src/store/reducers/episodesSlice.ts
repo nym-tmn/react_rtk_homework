@@ -1,36 +1,34 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { type EpisodesState, type EpisodesType } from "@types";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchEpisodes } from "@store/actions/episodes";
+import { type EpisodesState } from "@types";
 
 const initialState: EpisodesState = {
 	isLoading: false,
 	results: [],
 	error: '',
+	pages: 0,
 };
 
 export const episodesSlice = createSlice({
 	name: 'episodes',
 	initialState,
-	reducers: {
-		episodesFetching(state) {
-			state.isLoading = true;
-			state.error = '';
-		},
-		episodesFetchingSuccess(state, action: PayloadAction<EpisodesType>) {
-			state.isLoading = false;
-			state.results = action.payload
-			state.error = '';
-		},
-		episodesFetchingError(state, action: PayloadAction<string>) {
-			state.isLoading = false;
-			state.error = action.payload;
-		}
-	}
+	reducers: {},
+	extraReducers(builder) {
+				builder.addCase(fetchEpisodes.fulfilled, (state, action) => {
+					state.isLoading = false;
+					state.results = action.payload.results;
+					state.pages = action.payload.info.pages;
+					state.error = '';
+				});
+		builder.addCase(fetchEpisodes.pending, (state) => {
+					state.isLoading = true;
+					state.error = '';
+				});
+		builder.addCase(fetchEpisodes.rejected, (state, action) => {
+					state.isLoading = false;
+					state.error = action.payload;
+				});
+			}
 })
-
-export const {
-	episodesFetching,
-	episodesFetchingSuccess,
-	episodesFetchingError,
-} = episodesSlice.actions;
 
 export default episodesSlice.reducer;

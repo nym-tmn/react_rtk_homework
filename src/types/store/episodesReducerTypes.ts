@@ -3,7 +3,8 @@ import type { EpisodesType } from "@types";
 export interface EpisodesState {
 	isLoading: boolean;
 	results: EpisodesType;
-	error: string;
+	error?: string;
+	pages: number;
 }
 
 export enum EpisodesActionTypes {
