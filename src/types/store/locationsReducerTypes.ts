@@ -1,4 +1,4 @@
-import type { LocationsType } from "@types";
+import type { LocationsType } from "@allTypes/api";
 
 export interface LocationsState {
 	isLoading: boolean;

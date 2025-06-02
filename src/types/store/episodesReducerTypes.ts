@@ -1,4 +1,4 @@
-import type { EpisodesType } from "@types";
+import type { EpisodesType } from "@allTypes/api";
 
 export interface EpisodesState {
 	isLoading: boolean;

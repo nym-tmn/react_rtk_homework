@@ -1,23 +1,33 @@
-import { useEffect } from "react";
 import { ContentTitle, CustomImage, Flex, Pagination } from "@components";
 import { SectionStyles } from "@components/styles";
 import { Episode } from "./Episode/Episode";
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { loadingImage, failedImage } from "@assets/images";
 import type { EpisodeType } from "@allTypes/api";
-import { fetchEpisodes } from "@store/actions";
+import { episodesAPI } from "@store/actions";
 
 export const EpisodesPage = () => {
 
 	const { currentPage, portionCount } = useAppSelector(state => state.paginationReducer);
 
-	const { isLoading, results: episodes, error, pages } = useAppSelector(state => state.episodesReducer);
+	const { isLoading, data, isError, error } = episodesAPI.useFetchAllEpisodesQuery(currentPage);
 
+	const episodes = data?.results;
+	
+	const pages = data?.info.pages;
+	
 	const dispatch = useAppDispatch();
 
-	useEffect(() => {
-		dispatch(fetchEpisodes(currentPage))
-	}, [dispatch, currentPage])
+	let errorMessage: string | undefined = '';
+
+	if (isError) {
+		if ('status' in error) {
+			const serverError = error.data as { error?: string };
+			errorMessage = serverError?.error || 'Failed to load episodes.';
+		} else {
+			errorMessage = error.message;
+		}
+	}
 
 	return (
 		<>
@@ -34,10 +44,10 @@ export const EpisodesPage = () => {
 						</CustomImage>
 					</Flex>
 				</SectionStyles>
-			) : error ? (
+			) : isError && errorMessage ? (
 				<SectionStyles $display="flex">
 					<Flex $direction="column" $justify="center" $align="center">
-						<ContentTitle as={'h3'} $fontSize="32px">{error}</ContentTitle>
+							<ContentTitle as={'h3'} $fontSize="32px">{errorMessage}</ContentTitle>
 						<CustomImage>
 							<img src={failedImage} alt="Unsuccessful request" />
 						</CustomImage>
@@ -52,12 +62,12 @@ export const EpisodesPage = () => {
 									<Episode key={episode.id} name={episode.name} episode={episode.episode} air_date={episode.air_date} />)}
 						</Flex>
 					</SectionStyles>
-					<Pagination
+					{pages && <Pagination
 						pages={pages}
 						dispatch={dispatch}
 						currentPage={currentPage}
 						portionCount={portionCount}
-					/>
+					/>}
 				</>
 			)}
 		</>

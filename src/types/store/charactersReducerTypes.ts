@@ -1,4 +1,4 @@
-import type { CharactersType } from "@types";
+import type { CharactersType } from "@allTypes/api";
 
 export interface CharactersState {
 	isLoading: boolean;

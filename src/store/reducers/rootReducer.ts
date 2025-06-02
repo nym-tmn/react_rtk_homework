@@ -2,11 +2,11 @@ import { combineReducers } from "redux";
 import paginationReducer from './paginationSlice';
 import charactersReducer from './charactersSlice';
 import locationsReducer from './locationsSlice';
-import episodesReducer from './episodesSlice';
+import { episodesAPI } from "@store/actions";
 
 export const rootReducer = combineReducers({
 	paginationReducer,
 	charactersReducer,
 	locationsReducer,
-	episodesReducer,
+	[episodesAPI.reducerPath]: episodesAPI.reducer,
 });
