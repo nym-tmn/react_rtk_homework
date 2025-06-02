@@ -4,7 +4,8 @@ export interface CharactersState {
 	isLoading: boolean;
 	results: CharactersType;
 	searchInputValue: string;
-	error: string;
+	error?: string;
+	pages: number,
 }
 
 export enum CharactersActionTypes {

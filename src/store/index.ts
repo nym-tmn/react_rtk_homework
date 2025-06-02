@@ -5,9 +5,6 @@ export {
 } from "./reducers/paginationSlice";
 
 export {
-	charactersFetching,
-	charactersFetchingSuccess,
-	charactersFetchingError,
 	setSearchInputValue,
 } from "./reducers/charactersSlice";
 
@@ -31,11 +28,6 @@ export {
 	type RootState,
 	type AppDispatch,
 } from "./store";
-
-export {
-	fetchCharacters,
-	fetchFiltredCharacters,
-} from './actions/characters';
 
 export {
 	fetchLocations

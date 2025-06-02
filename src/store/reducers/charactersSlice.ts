@@ -1,41 +1,43 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { type CharactersState, type CharactersType } from "@types";
+import { fetchCharacters} from "@store/actions/characters";
+import { type CharactersState } from "@types";
 
 const initialState: CharactersState = {
 	isLoading: false,
 	results: [],
 	searchInputValue: '',
 	error: '',
+	pages: 0,
 };
 
 export const charactersSlice = createSlice({
 	name: 'characters',
 	initialState,
 	reducers: {
-		charactersFetching(state) {
-			state.isLoading = true;
-			state.error = '';
-		},
-		charactersFetchingSuccess(state, action: PayloadAction<CharactersType>) {
-			state.isLoading = false;
-			state.results = action.payload
-			state.error = '';
-		},
 		setSearchInputValue(state, action: PayloadAction<string>) {
 			state.searchInputValue = action.payload;
 		},
-		charactersFetchingError(state, action: PayloadAction<string>) {
+	},
+	extraReducers(builder) {
+		builder.addCase(fetchCharacters.fulfilled, (state, action) => {
+			state.isLoading = false;
+			state.results = action.payload.results;
+			state.pages = action.payload.info.pages;
+			state.error = '';
+		});
+		builder.addCase(fetchCharacters.pending, (state) => {
+			state.isLoading = true;
+			state.error = '';
+		});
+		builder.addCase(fetchCharacters.rejected, (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
-		},
+		});
 	}
 })
 
 export const {
-	charactersFetching,
-	charactersFetchingSuccess,
 	setSearchInputValue,
-	charactersFetchingError,
 } = charactersSlice.actions;
 
 export default charactersSlice.reducer;

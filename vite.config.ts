@@ -19,6 +19,7 @@ export default defineConfig({
 			'@providers': path.resolve('src/providers'),
 			'@context': path.resolve('src/context'),
 			'@store': path.resolve('src/store'),
+			'@utils': path.resolve('src/utils'),
 		}
 	}
 })

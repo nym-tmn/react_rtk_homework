@@ -6,24 +6,22 @@ import failedImage from '@assets/images/failed_Image.webp';
 import loadingImage from '@assets/images/loading.webp';
 import { useDebounce } from "@hooks";
 import { useAppDispatch, useAppSelector } from "@hooks";
-import { fetchCharacters, fetchFiltredCharacters, setCurrentPage, setSearchInputValue } from "@store";
+import { setCurrentPage, setSearchInputValue } from "@store";
+import { fetchCharacters } from "@store/actions/characters";
 
 export const CharactersPage = () => {
 
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	const [selectedCharacter, setSelectedCharacter] = useState<CharacterType | null>(null);
 
-	const {
-		pages,
-		currentPage,
-		portionCount
-	} = useAppSelector(state => state.paginationReducer);
+	const { currentPage, portionCount } = useAppSelector(state => state.paginationReducer);
 
 	const {
 		isLoading,
 		results: characters,
 		searchInputValue,
-		error
+		error,
+		pages,
 	} = useAppSelector(state => state.charactersReducer)
 
 	const dispatch = useAppDispatch();
@@ -59,11 +57,7 @@ export const CharactersPage = () => {
 	}
 
 	useEffect(() => {
-		if (debouncedSearchValue) {
-			dispatch(fetchFiltredCharacters(currentPage, debouncedSearchValue))
-		} else {
-			dispatch(fetchCharacters(currentPage))
-		}
+		dispatch(fetchCharacters({ currentPage, debouncedSearchValue }))
 	}, [dispatch, debouncedSearchValue, currentPage])
 
 	return (

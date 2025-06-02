@@ -1,51 +1,28 @@
 import { getCharacters, getFiltredCharacters } from "@api";
-import {
-	charactersFetching,
-	charactersFetchingError,
-	charactersFetchingSuccess,
-	setPages,
-	type AppDispatch
-} from "@store";
-import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import type { CharactersType, ResponseType } from "@types";
+import { handleError } from "@utils";
 
-export const fetchCharacters = (currentPage: number) => async (dispatch: AppDispatch) => {
-	try {
-		dispatch(charactersFetching())
-		const response = await getCharacters(currentPage);
-		dispatch(charactersFetchingSuccess(response.results));
-		dispatch(setPages(response.info.pages))
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			if (error.response?.status === 404) {
-				dispatch(charactersFetchingError("Failed to load characters."));
-			}
-		} else if (error instanceof Error) {
-			console.error(error.message);
-			dispatch(charactersFetchingError("An unexpected error occurred"));
-		} else {
-			console.error('Unknown error:', error);
-			dispatch(charactersFetchingError("Something went wrong"));
+export const fetchCharacters = createAsyncThunk<
+	ResponseType<CharactersType>,
+	{ currentPage: number, debouncedSearchValue: string },
+	{ rejectValue: string }
+>(
+	'characters/fetchAll',
+	async ({ currentPage, debouncedSearchValue }, thunkAPI) => {
+		try {
+			const response = await (debouncedSearchValue
+				? getFiltredCharacters(currentPage, debouncedSearchValue)
+				: getCharacters(currentPage))
+			return response;
+		} catch (error) {
+			return handleError<CharactersType>(
+				error,
+				thunkAPI,
+				debouncedSearchValue
+					? `No characters found for "${debouncedSearchValue}"`
+					: "Failed to load characters."
+			);
 		}
 	}
-}
-
-export const fetchFiltredCharacters = (currentPage: number, debouncedSearchValue: string) => async (dispatch: AppDispatch) => {
-	try {
-		dispatch(charactersFetching())
-		const response = await getFiltredCharacters(currentPage, debouncedSearchValue);
-		dispatch(charactersFetchingSuccess(response.results))
-		dispatch(setPages(response.info.pages))
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			if (error.response?.status === 404) {
-				dispatch(charactersFetchingError(`No characters found for "${debouncedSearchValue}"`));
-			}
-		} else if (error instanceof Error) {
-			console.error(error.message);
-			dispatch(charactersFetchingError("An unexpected error occurred"));
-		} else {
-			console.error('Unknown error:', error);
-			dispatch(charactersFetchingError("Something went wrong"));
-		}
-	}
-}
+)
